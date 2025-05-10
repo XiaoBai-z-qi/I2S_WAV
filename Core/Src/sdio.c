@@ -47,6 +47,15 @@ void MX_SDIO_SD_Init(void)
   hsd.Init.ClockDiv = 0;
   /* USER CODE BEGIN SDIO_Init 2 */
 
+  //切换为 -> 1位线宽初始化
+  hsd.Init.BusWide = SDIO_BUS_WIDE_1B; 
+  HAL_SD_Init(&hsd);
+
+  //切换回 -> 4位线宽
+  if(HAL_SD_ConfigWideBusOperation(&hsd, SDIO_BUS_WIDE_4B) != HAL_OK)
+  {
+    Error_Handler();
+  }
   /* USER CODE END SDIO_Init 2 */
 
 }
