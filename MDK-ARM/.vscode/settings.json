@@ -1,5 +1,14 @@
 {
     "files.associations": {
-        "sdio.h": "c"
+        "sdio.h": "c",
+        "wav_driver.h": "c",
+        "main.h": "c",
+        "stdio.h": "c",
+        "string.h": "c",
+        "dma.h": "c",
+        "gpio.h": "c",
+        "fatfs.h": "c",
+        "i2s.h": "c",
+        "usart.h": "c"
     }
 }

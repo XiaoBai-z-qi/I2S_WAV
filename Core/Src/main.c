@@ -27,7 +27,9 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include <stdio.h>
+#include <string.h>
+#include "wav_driver.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -59,7 +61,11 @@ void SystemClock_Config(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-
+int fputc(int ch, FILE *f) {
+  (void)f;  // 忽略参数，避免警告
+  HAL_UART_Transmit(&huart1, (const uint8_t *)&ch, 1, 500); // 发送一个字节
+  return ch;
+}
 /* USER CODE END 0 */
 
 /**
@@ -97,13 +103,25 @@ int main(void)
   MX_USART1_UART_Init();
   MX_FATFS_Init();
   /* USER CODE BEGIN 2 */
-
+  WAV_Disp();
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+  uint32_t now = 0, loop_cnt = 0, next_tick = 1000;
   while (1)
   {
+    now = uwTick;
+
+    if (now >= next_tick) 
+    {
+        char s[128];
+        sprintf(s, "Tick %lu loop = %u\r\n", now / 1000, loop_cnt);
+        printf("%s", s);
+        loop_cnt = 0;
+        next_tick = now + 1000;
+    }
+	++loop_cnt;
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
