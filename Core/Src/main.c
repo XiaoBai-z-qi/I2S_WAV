@@ -66,6 +66,17 @@ int fputc(int ch, FILE *f) {
   HAL_UART_Transmit(&huart1, (const uint8_t *)&ch, 1, 500); // 发送一个字节
   return ch;
 }
+
+// uint8_t BSP_SD_IsDetected(void)
+// {
+//     __IO uint8_t status = SD_PRESENT;
+
+//     if (HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_15) != GPIO_PIN_RESET) {
+//         status = SD_NOT_PRESENT;
+//     }
+
+//     return status;
+// }
 /* USER CODE END 0 */
 
 /**
@@ -103,7 +114,7 @@ int main(void)
   MX_USART1_UART_Init();
   MX_FATFS_Init();
   /* USER CODE BEGIN 2 */
-  WAV_Disp();
+	WAV_Disp();
   /* USER CODE END 2 */
 
   /* Infinite loop */
