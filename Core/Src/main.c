@@ -50,7 +50,7 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-
+extern volatile uint32_t WAV_Count;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -127,8 +127,8 @@ int main(void)
     if (now >= next_tick) 
     {
         char s[128];
-        sprintf(s, "Tick %lu loop = %u\r\n", now / 1000, loop_cnt);
-        printf("%s", s);
+        sprintf(s, "Tick %lu loop = %u", now / 1000, loop_cnt);
+        printf("%s WAV_Count = %u\r\n", s, WAV_Count);
         loop_cnt = 0;
         next_tick = now + 1000;
     }
